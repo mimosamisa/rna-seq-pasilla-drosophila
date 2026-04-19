@@ -21,7 +21,7 @@ used to guide junction detection (overhang = 36 bp = read length − 1).
 | Annotated splices | 94,197 | 92,597 |
 
 ## Key Findings
-- Both samples exceed the 70% unique mapping quality threshold ✅
+- Both samples exceed the 70% unique mapping quality threshold 
 - Low mismatch rates (< 2%) confirm high alignment fidelity
 - Higher unmapped rate in treated sample reflects heavier trimming
 - Annotated splice junctions dominate (GT/AG canonical: > 99%)

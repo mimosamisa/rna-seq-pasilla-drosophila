@@ -84,9 +84,6 @@ Raw reads were assessed using Falco and summarized with MultiQC. All files showe
 
 **Key observation:** The 3′ quality drop in reverse reads (R2) is typical of Illumina paired-end sequencing and is corrected by quality trimming in the next step. No adapter contamination was detected above 0.1%, indicating library preparation was clean.
 
-![Figure 1: MultiQC QC Summary](figures/figure1_multiqc_qc.png)
-*Figure 1. MultiQC summary of raw read quality metrics across all four FASTQ files. Forward reads (R1) pass all major quality metrics. Reverse reads (R2) show expected 3′ quality degradation.*
-
 ---
 
 ### 2. Read Trimming
@@ -118,18 +115,11 @@ Trimmed reads were mapped to the *Drosophila melanogaster* dm6 genome using STAR
 
 Both samples exceed the 70% unique mapping threshold used as a quality benchmark, confirming successful alignment to the reference genome. The higher unmapped rate in the treated sample (11.1% too short) reflects the greater amount of trimming applied. The low mismatch rates (<2%) indicate high alignment fidelity.
 
-![Figure 2: STAR Alignment Scores](figures/figure2_star_alignment.png)
-*Figure 2. STAR alignment score summary from MultiQC showing the breakdown of uniquely mapped (blue), multi-mapped, and unmapped reads for both samples.*
-
 ---
 
 ### 4. Genome Visualization
 
 Aligned BAM files were visualized using JBrowse2 and pyGenomeTracks to confirm read distribution across gene bodies and splice junctions.
-
-![Figure 3: JBrowse2 / pyGenomeTracks Coverage](figures/figure3_jbrowse_coverage.png)
-*Figure 3. Genome browser view showing RNA-seq read coverage (pink/magenta: treated GSM461180; dark red: untreated GSM461177) over a representative genomic locus. Reads align to annotated exons with clear splice junction patterns. Both strands are shown. The Thd1 gene locus is highlighted with multiple isoforms visible in the gene track (blue). Coverage is broadly similar between conditions at this locus.*
-
 The coverage plots confirm that reads are distributed across exonic regions with clear gaps at introns, consistent with proper spliced alignment. No major mapping artifacts were observed.
 
 ---
@@ -161,25 +151,13 @@ Read counts per gene were obtained using featureCounts in paired-end, unstranded
 
 Approximately 63% of reads were successfully assigned to annotated features in both samples. The multi-mapping category accounts for the largest fraction of unassigned reads, consistent with the STAR multi-mapping rates seen above.
 
-![Figure 4: featureCounts Assignment Plot](figures/figure4_featurecounts.png)
-*Figure 4. featureCounts assignment summary from MultiQC. Blue represents reads successfully assigned to genomic features. Dark grey (unmapped), red (multi-mapping), and orange (ambiguity) represent unassigned fractions.*
-
-![Figure 5: STAR Gene Counts (Unstranded)](figures/figure5_star_gene_counts.png)
-*Figure 5. STAR gene count summary in unstranded mode, confirming that the majority of reads overlap annotated features (blue). Small fractions fall in no-feature, ambiguous, multimapping, or unmapped categories.*
-
 ---
 
 ### 7. PCA and Sample Distance Heatmap
 
 Principal Component Analysis (PCA) and sample-to-sample distance heatmaps were generated from DESeq2 normalized counts across all seven samples.
 
-![Figure 6: PCA Plot](figures/figure6_pca.png)
-*Figure 6. PCA plot of all seven samples. PC1 (48% variance) separates treated from untreated conditions. PC2 (33% variance) separates paired-end (PE) from single-end (SE) libraries. Each group is color-coded: PE:treated, PE:untreated, SE:treated, SE:untreated. The clear separation along PC1 confirms a strong transcriptomic effect of PS depletion.*
-
-![Figure 7: Sample Distance Heatmap](figures/figure7_heatmap_distances.png)
-*Figure 7. Sample-to-sample distance heatmap showing Euclidean distances between all samples based on normalized counts. Treated samples (GSM461179, 180, 181) cluster together and are more distant from untreated samples (GSM461176, 177, 178, 182), confirming the biological signal. Within-condition replicates show lower distances, indicating reproducibility.*
-
-The PCA clearly shows that the dominant source of variance (PC1, 48%) is the treatment effect (PS depletion), while sequencing type (paired-end vs single-end) drives PC2 (33%). This validates the multi-factor design used in DESeq2.
+The PCA showed that the dominant source of variance (PC1, 48%) is the treatment effect (PS depletion), while sequencing type (paired-end vs single-end) drives PC2 (33%). This validates the multi-factor design used in DESeq2.
 
 ---
 
@@ -209,12 +187,6 @@ DESeq2 was run with a model accounting for both treatment (treated vs untreated)
 
 The most downregulated gene is *SPARC* (Secreted Protein Acidic and Rich in Cysteine), a conserved extracellular matrix glycoprotein. The most upregulated gene is *Ant2* (Adenine nucleotide translocase 2), involved in mitochondrial ADP/ATP exchange. Notably, the *pasilla* gene itself (FBgn0261552, *ps*) is significantly downregulated (log2FC = −1.62, padj = 1.5 × 10⁻²⁹), confirming effective RNAi knockdown.
 
-![Figure 8: MA Plot](figures/figure8_ma_plot.png)
-*Figure 8. MA plot showing log2 fold change (y-axis) versus mean normalized counts (x-axis) for all tested genes. Each point represents one gene. The distribution shows the majority of genes are unchanged (centered near zero), while a subset of genes at both high and low expression levels show significant differential expression. Genes with very low counts are excluded from the analysis.*
-
-![Figure 9: Dispersion Estimates](figures/figure9_dispersion.png)
-*Figure 9. DESeq2 dispersion estimate plot. Gene-level estimates (black dots) are shrunk toward the fitted trend line (red curve) to produce final dispersion estimates (blue dots). The inverse relationship between dispersion and mean count is expected and indicates appropriate model fitting.*
-
 ---
 
 ### 9. GO Enrichment Analysis
@@ -236,9 +208,6 @@ Gene Ontology (GO) enrichment was performed using goseq with the Wallenius metho
 | MF | Glutathione transferase activity | ~0.003 | ~22% |
 | CC | Extracellular region | ~0.001 | ~12% |
 
-![Figure 10: GO Enrichment Dotplot](figures/figure10_go_enrichment.png)
-*Figure 10. Dotplot of top over-represented GO categories (Wallenius method). Dot size indicates the number of DE genes in each category; dot color indicates adjusted p-value (darker = more significant). Glycogen and glucan biosynthetic processes show the highest percentage of DE genes (~80%), suggesting widespread metabolic reprogramming upon PS depletion.*
-
 The enrichment of glycogen metabolism terms is notable, as *pasilla*/NOVA splicing factors regulate metabolic gene expression post-transcriptionally. The enrichment of extracellular region and blood-brain barrier terms reflects changes in *SPARC* and other secreted/structural proteins.
 
 ---
@@ -249,13 +218,7 @@ KEGG pathway analysis was performed using goseq and visualized with Pathview for
 
 **dme00010 — Glycolysis / Gluconeogenesis**
 
-![Figure 11: KEGG Glycolysis Pathway](figures/figure11_kegg_glycolysis.png)
-*Figure 11. Pathview visualization of the Glycolysis/Gluconeogenesis KEGG pathway (dme00010). Red boxes indicate genes upregulated in treated cells; green boxes indicate downregulated genes. Multiple glycolytic enzymes show significant differential expression, consistent with GO enrichment results showing changes in small molecule and carbohydrate metabolism.*
-
 **dme03040 — Spliceosome**
-
-![Figure 12: KEGG Spliceosome Pathway](figures/figure12_kegg_spliceosome.png)
-*Figure 12. Pathview visualization of the Spliceosome KEGG pathway (dme03040). The highlighted component (green) indicates a downregulated spliceosome-associated gene. Given that *pasilla* is itself a splicing factor, changes in spliceosome component expression suggest potential feedback or compensatory regulation of the RNA splicing machinery.*
 
 ---
 

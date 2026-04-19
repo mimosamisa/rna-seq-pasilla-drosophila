@@ -21,9 +21,4 @@ files were aggregated into a single report using MultiQC.
 - Per base sequence content: FAIL (expected for RNA-seq random priming)
 - Per tile sequence quality: FAIL (normal flow cell variation)
 
-## Figures in This Folder
-
-| File | Description |
-|------|-------------|
-| `figure1_multiqc_qc.png` | MultiQC general statistics summary table |
 

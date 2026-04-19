@@ -1,0 +1,8 @@
+## FastQC Summary Statistics
+
+| Sample                              | % Duplicates | % GC | Avg Seq Length | Median Seq Length | % Fails | Total Sequences (Millions) |
+|-------------------------------------|--------------|------|----------------|-------------------|---------|----------------------------|
+| GSM461177_untreat_paired_forward    | 23.60        | 55   | 37             | 37                | 9.09    | 1.06                       |
+| GSM461177_untreat_paired_reverse    | 25.17        | 55   | 37             | 37                | 18.18   | 1.06                       |
+| GSM461180_treat_paired_forward      | 23.74        | 56   | 37             | 37                | 18.18   | 1.23                       |
+| GSM461180_treat_paired_reverse      | 8.10         | 56   | 37             | 37                | 18.18   | 1.23                       |
